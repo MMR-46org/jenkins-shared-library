@@ -2,7 +2,6 @@ def call () {
     node ('workstation') {
         if (env.BRANCH_NAME == 'main') {
             echo "Nothing to do"
-            common.sast()
         }
         else if (env.BRANCH_NAME ==~ 'PR.*') {
             common.unitTests()
