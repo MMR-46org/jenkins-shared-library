@@ -34,7 +34,7 @@ def sca() {
 
 def secretDetection() {
     stage ('SECRET DETECTION') {
-        echo 'OK'
+        sh 'trufflehog filesystem .'
     }
 }
 
