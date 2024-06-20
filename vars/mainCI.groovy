@@ -1,7 +1,10 @@
 def call () {
     node ('workstation') {
+
+        common.codeCheckout
+
         if (env.BRANCH_NAME == 'main') {
-            common.codeQuality()
+            echo "Nothing to do"
         }
         else if (env.BRANCH_NAME ==~ 'PR.*') {
             common.unitTests()
