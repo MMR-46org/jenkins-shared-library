@@ -43,5 +43,3 @@ def artifactProduce() {
         echo 'OK'
     }
 }
-
-    withCredentials([usernamePassword(credentialsId:'SONARQUBE', passwordVariable: 'SONAR_PASS', usernameVariable: 'SONAR_USER')])
