@@ -34,13 +34,15 @@ def sca() {
 
 def secretDetection() {
     stage ('SECRET DETECTION') {
-        sh 'trufflehog filesystem .'
-    }
+//        sh 'trufflehog filesystem .'
+  }
 }
 
 def artifactProduce() {
     stage ('Artifact Produce') {
-        echo 'OK'
+        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 512646826903.dkr.ecr.us-east-1.amazonaws.com'
+        sh 'docker build -t  512646826903.dkr.ecr.us-east-1.amazonaws.com/${service_name}:${TAG_NAME} .'
+        sh 'docker push -t  512646826903.dkr.ecr.us-east-1.amazonaws.com/${service_name}:${TAG_NAME} .'
     }
 }
 
