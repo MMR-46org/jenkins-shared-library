@@ -1,7 +1,7 @@
 def call () {
     node ('workstation') {
 
-        common.codeCheckout
+        common.codeCheckout()
 
         if (env.BRANCH_NAME == 'main') {
             echo "Nothing to do"
