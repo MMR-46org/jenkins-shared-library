@@ -66,10 +66,11 @@ def codeCheckout() {
 
 def codeDeploy() {
     stage('Dev Deployment') {
+        withCredentials([usernamePassword(credentialsId:'TOKEN', passwordVariable: 'GIT_PASS', usernameVariable: 'GIT_USER')])
         sh '''
           rm -rf /tmp/repo
           mkdir -p /tmp/repo
-          git clone https://github.com/MMR-46org/${service_name} /tmp/repo
+          git clone https://${GIT_USER}:${GIT_PASS}@github.com/MMR-46org/${service_name} /tmp/repo
           cd /tmp/repo
           sed -i "/512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}/ c \\ \\ \\ \\ image: 512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}:${TAG_NAME}"  helm/chart/values.yaml
           git add helm/chart/values.yaml
