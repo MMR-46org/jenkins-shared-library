@@ -66,8 +66,8 @@ def codeCheckout() {
 
 def codeDeploy() {
     stage('Dev Deployment') {
-        withCredentials([usernamePassword(credentialsId:'TOKEN', passwordVariable: 'GIT_PASS', usernameVariable: 'GIT_USER')])
-        sh '''
+        withCredentials([usernamePassword(credentialsId: 'TOKEN', passwordVariable: 'GIT_PASS', usernameVariable: 'GIT_USER')]) {
+            sh '''
           rm -rf /tmp/repo
           mkdir -p /tmp/repo
           git clone https://${GIT_USER}:${GIT_PASS}@github.com/MMR-46org/${service_name} /tmp/repo
@@ -77,5 +77,6 @@ def codeDeploy() {
           git commit -m "change from jenkins | change version number to ${TAG_NAME}"
           git push
         '''
+        }
     }
 }
