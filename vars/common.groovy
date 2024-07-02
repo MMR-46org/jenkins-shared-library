@@ -76,6 +76,7 @@ def codeDeploy() {
           git add helm/chart/templates/deployment.yml
           git commit -m "change from jenkins | change version number to ${TAG_NAME}"
           git push
+          argocd app sync ${service_name}
         '''
         }
     }
