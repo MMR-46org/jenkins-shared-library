@@ -72,7 +72,7 @@ def codeDeploy() {
           mkdir -p /tmp/repo
           git clone https://${GIT_USER}:${GIT_PASS}@github.com/MMR-46org/${service_name} /tmp/repo
           cd /tmp/repo
-          sed -i "/512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}/ c \\ \\ \\ \\ image: 512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}:${TAG_NAME}"  helm/chart/templates/deployment.yml
+          sed -i "/512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}/ c \\ \\ \\ \\ \\ \\ image: 512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}:${TAG_NAME}"  helm/chart/templates/deployment.yml
           git add helm/chart/templates/deployment.yml
           git commit -m "change from jenkins | change version number to ${TAG_NAME}"
           git push
