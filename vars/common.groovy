@@ -62,3 +62,19 @@ def codeCheckout() {
         )
     }
 }
+
+
+def codeDeploy() {
+    stage('Dev Deployment') {
+        sh '''
+          rm -rf /tmp/repo
+          mkdir -p /tmp/repo
+          git clone https://github.com/MMR-46org/${service_name} /tmp/repo
+          cd /tmp/repo
+          sed -i "/512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}/ c \\ \\ \\ \\ image: 512646826903.dkr.ecr.us-east-1.amazonaws.com\\/${service_name}:${TAG_NAME}"  helm/chart/values.yaml
+          git add helm/chart/values.yaml
+          git commit -m "change from jenkins | change version number to ${TAG_NAME}"
+          git push
+        '''
+    }
+}
